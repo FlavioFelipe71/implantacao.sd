@@ -74,6 +74,13 @@ def buscar_peso_no_packinglist(produto, packinglist_df):
 
 # Configura o locale para o padrão brasileiro
 #locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+try:
+    # Tenta definir o locale para pt_BR.UTF-8
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+except locale.Error:
+    # Se não for possível, usa um fallback (como 'en_US.UTF-8')
+    locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+    print("Locale 'pt_BR.UTF-8' não disponível, utilizando 'en_US.UTF-8' como fallback.")
 
 
 def formatar_valor(valor):
