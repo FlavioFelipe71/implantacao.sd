@@ -8,6 +8,29 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
+# CSS para garantir que a página comece o mais próximo possível do topo
+st.markdown(
+    """
+    <style>
+        /* Remover margens e padding do corpo */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Remover qualquer espaçamento adicional do topo */
+        .stApp {
+            padding-top: 0 !important;
+        }
+        
+        /* Opcional: Remover o padding do conteúdo de Streamlit */
+        .stContainer {
+            padding-top: 0 !important;
+        }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
     """
