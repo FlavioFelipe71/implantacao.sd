@@ -8,7 +8,7 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# CSS para garantir que a página comece o mais próximo possível do topo
+# CSS para garantir que a página se inicie o mais próximo possível do topo
 st.markdown(
     """
     <style>
@@ -18,14 +18,27 @@ st.markdown(
             padding: 0;
         }
 
-        /* Remover qualquer espaçamento adicional do topo */
+        /* Garantir que o conteúdo do Streamlit inicie no topo */
         .stApp {
             padding-top: 0 !important;
         }
         
-        /* Opcional: Remover o padding do conteúdo de Streamlit */
-        .stContainer {
+        /* Remover qualquer margem ou padding extra do cabeçalho */
+        .stHeader {
+            margin-top: 0 !important;
             padding-top: 0 !important;
+        }
+
+        /* Remover margens extras da área do conteúdo */
+        .main .block-container {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Ajuste o padding nas áreas de layout para remover qualquer margem superior */
+        .stMarkdown, .stText, .stTitle {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
         }
     </style>
     """, 
