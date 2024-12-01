@@ -10,8 +10,6 @@ st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
 # CSS para manipular o container stVerticalBlockBorderWrapper
 st.markdown(
-    
-st.markdown
 """
     <style>
         /* Elevar o container stVerticalBlockBorderWrapper */
