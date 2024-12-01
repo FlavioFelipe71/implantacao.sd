@@ -8,9 +8,13 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-#MainMenu {
+# Add custom CSS to hide the GitHub icon
+hide_github_icon = """
+#GithubIcon {
   visibility: hidden;
 }
+"""
+st.markdown(hide_github_icon, unsafe_allow_html=True)
 
 ##### Oculta o botão Deploy do Streamilit
 st.markdown("""
