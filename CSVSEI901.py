@@ -15,7 +15,7 @@ st.markdown(
         /* Elevar o container stAppViewContainer para o topo */
         .stAppViewContainer {
             position: relative !important;  /* Torna o container relativo */
-            z-index: 9999 !important;  /* Eleva o container para o topo da pilha de elementos */
+            z-index: 6666 !important;  /* Eleva o container para o topo da pilha de elementos */
         }
     </style>
     """, 
