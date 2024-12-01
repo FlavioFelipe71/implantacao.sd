@@ -8,13 +8,13 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# CSS para ocultar o ícone do GitHub
+# CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
     """
     <style>
-        /* Ocultar o ícone do GitHub no canto superior direito */
-        .css-1v0ddu9 {
-            visibility: hidden;
+        /* Ocultar o ícone do GitHub ou outros botões da barra de ferramentas */
+        .stToolbarActionButton {
+            display: none;
         }
     </style>
     """, 
