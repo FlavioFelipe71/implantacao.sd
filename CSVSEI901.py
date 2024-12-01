@@ -21,6 +21,19 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# CSS para ocultar o elemento <header>
+st.markdown(
+    """
+    <style>
+        /* Ocultar o header completo */
+        .stAppHeader {
+            display: none;
+        }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
 ##### Oculta o botão Deploy do Streamilit
 st.markdown("""
     <style>
