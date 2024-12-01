@@ -145,11 +145,11 @@ def processar_xml(root):
 
 # Coluna 1: Campo de entrada para o código do FORNECEDOR (6 caracteres)
     with col1:
-        fornecedor_input = st.text_input("Informe o código do FORNECEDOR (6 caracteres):", max_chars=6)
+        fornecedor_input = st.text_input("Informe o COD do FORNECEDOR (6 caracteres):", max_chars=6)
 
     # Coluna 2: Campo de entrada para o Nro da Ordem de Compra
     with col2:
-        ordem_compra_input = st.text_input("Informe o Nro da Ordem de Compra:", max_chars=15)  # Adicionando o campo para Ordem de Compra
+        ordem_compra_input = st.text_input("Informe o NRO da Ordem de Compra:", max_chars=15)  # Adicionando o campo para Ordem de Compra
 
     # Estilo do botão e dos campos de entrada (o mesmo que você forneceu)
     st.markdown("""<style>
