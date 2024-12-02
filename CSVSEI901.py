@@ -8,19 +8,18 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# CSS para ocultar o elemento com a classe _link_gzau3_10
+# CSS para ocultar o badge "Hosted with Streamlit"
 st.markdown(
     """
     <style>
-        /* Ocultar o elemento com a classe _link_gzau3_10 */
-        ._link_gzau3_10 {
+        /* Ocultar o badge "Hosted with Streamlit" */
+        a._container_gzau3_1 {
             display: none !important;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
-
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
     """
