@@ -8,16 +8,18 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# CSS para ocultar o menu, rodapé e cabeçalho
-hide_st_style = """
+# CSS para ocultar o elemento específico
+hide_badge_style = """
 <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
+a._container_gzau3_1._viewerBadge_nim44_23 {
+    visibility: hidden;
+    display: none;
+}
 </style>
 """
 
-st.markdown(hide_st_style, unsafe_allow_html=True)
+# Adicionando o CSS ao Streamlit
+st.markdown(hide_badge_style, unsafe_allow_html=True)
 
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
