@@ -8,18 +8,28 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# CSS para ocultar o elemento
-hide_element_script = """
+# Novo código SVG para o ícone que você deseja
+new_svg_icon = """
+<svg width="303" height="165" viewBox="0 0 303 165" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="151" cy="82" r="70" fill="#4CAF50"/>
+    <text x="151" y="82" text-anchor="middle" fill="white" font-size="60" font-family="Arial" dy=".3em">NEW</text>
+</svg>
+"""
+
+# CSS para ocultar o badge original da Streamlit
+hide_st_style = """
 <style>
-/* Ocultar o elemento específico pela classe */
-._link_gzau3_10.__web-inspector-hide-shortcut__ {
+._container_gzau3_1._viewerBadge_nim44_23 {
     display: none !important;
 }
 </style>
 """
 
-# Adicionando o CSS ao Streamlit
-st.markdown(hide_element_script, unsafe_allow_html=True)
+# Aplicando o CSS para ocultar o badge original
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
+# Adicionando o novo ícone em vez do original
+st.markdown(new_svg_icon, unsafe_allow_html=True)
 
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
