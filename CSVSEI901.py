@@ -8,18 +8,22 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# CSS para ocultar o badge com a classe "_link_gzau3_10"
+# Inject JavaScript para remover o elemento com a classe "_link_gzau3_10"
 st.markdown(
     """
-    <style>
-        /* Ocultar qualquer elemento com a classe '_link_gzau3_10' */
-        div._link_gzau3_10 {
-            display: none !important;
-        }
-    </style>
+    <script>
+        // Aguarde o carregamento completo do DOM
+        document.addEventListener("DOMContentLoaded", function() {
+            // Selecione o elemento com a classe '_link_gzau3_10'
+            var element = document.querySelector('div._link_gzau3_10');
+            if (element) {
+                element.remove(); // Remove o elemento do DOM
+            }
+        });
+    </script>
     """,
     unsafe_allow_html=True
-)
+
 
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
