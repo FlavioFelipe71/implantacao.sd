@@ -12,14 +12,21 @@ st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 st.markdown(
     """
     <style>
-        /* Ocultar o badge "Hosted with Streamlit" */
-        a._container_gzau3_1 {
+        /* Ocultar todos os links contendo o texto 'Hosted with Streamlit' */
+        a:has(p._text_gzau3_22) {
             display: none !important;
+        }
+
+        /* Alternativa para ocultar qualquer elemento relacionado ao badge */
+        footer {
+            visibility: hidden !important;
+            height: 0 !important;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
     """
