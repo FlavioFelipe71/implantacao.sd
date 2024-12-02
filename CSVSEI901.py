@@ -44,13 +44,12 @@ footer {
 </style>
 
 <div class='footer'>
-    <p>teste<a href='https://scvsei901.streamlit.app/' target='_blank'>Click aqui para acessar a pagina</a></p>
+    <p>Custom message here! <a href='https://www.streamlit.io' target='_blank'>Click here for Streamlit</a></p>
 </div>
 """
 
 # Aplica o rodapé personalizado no app Streamlit
-st.markdown(footer, unsafe_allow_html=True)
-#################################################################
+st.markdown(footer, unsafe_allow_html=True)###################
 # CSS para ocultar o elemento <header>
 st.markdown(
     """
