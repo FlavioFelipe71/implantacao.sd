@@ -8,27 +8,18 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# CSS e JavaScript para ocultar o elemento
-hide_badge_script = """
+# CSS para ocultar o elemento
+hide_element_script = """
 <style>
-/* Ocultar via CSS */
-a._container_gzau3_1._viewerBadge_nim44_23 {
+/* Ocultar o elemento específico pela classe */
+._link_gzau3_10.__web-inspector-hide-shortcut__ {
     display: none !important;
 }
 </style>
-<script>
-// Ocultar via JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    const badge = document.querySelector('a._container_gzau3_1._viewerBadge_nim44_23');
-    if (badge) {
-        badge.style.display = 'none';
-    }
-});
-</script>
 """
 
-# Adicionando o CSS e o JavaScript ao Streamlit
-st.markdown(hide_badge_script, unsafe_allow_html=True)
+# Adicionando o CSS ao Streamlit
+st.markdown(hide_element_script, unsafe_allow_html=True)
 
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
