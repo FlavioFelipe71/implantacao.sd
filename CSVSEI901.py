@@ -8,11 +8,10 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# Novo código SVG para o ícone que você deseja
+# Novo código SVG para o ícone desejado (um exemplo simples de um círculo)
 new_svg_icon = """
-<svg width="303" height="165" viewBox="0 0 303 165" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="151" cy="82" r="70" fill="#4CAF50"/>
-    <text x="151" y="82" text-anchor="middle" fill="white" font-size="60" font-family="Arial" dy=".3em">NEW</text>
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
 </svg>
 """
 
@@ -24,6 +23,12 @@ hide_st_style = """
 }
 </style>
 """
+
+# Aplicando o CSS para ocultar o badge original
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
+# Exibindo o novo ícone em vez do original
+st.markdown(new_svg_icon, unsafe_allow_html=True)
 
 # Aplicando o CSS para ocultar o badge original
 st.markdown(hide_st_style, unsafe_allow_html=True)
