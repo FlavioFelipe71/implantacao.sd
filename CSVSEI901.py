@@ -8,19 +8,14 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# Inject JavaScript para remover o elemento com a classe "_link_gzau3_10"
 st.markdown(
     """
-    <script>
-        // Aguarde o carregamento completo do DOM
-        document.addEventListener("DOMContentLoaded", function() {
-            // Selecione o elemento com a classe '_link_gzau3_10'
-            var element = document.querySelector('div._link_gzau3_10');
-            if (element) {
-                element.remove(); // Remove o elemento do DOM
-            }
-        });
-    </script>
+    <style>
+        /* Ocultar qualquer div que contenha SVG no rodapé */
+        footer div:has(svg) {
+            display: none !important;
+        }
+    </style>
     """,
     unsafe_allow_html=True
 )
