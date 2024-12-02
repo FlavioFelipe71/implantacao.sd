@@ -8,20 +8,26 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
+# CSS para ocultar o rodapé original e exibir "goodbye"
+hide_footer_style = """
+<style>
 footer {
-	
-	visibility: hidden;
-	
-	}
-footer:after {
-	content:'goodbye'; 
-	visibility: visible;
-	display: block;
-	position: relative;
-	#background-color: red;
-	padding: 5px;
-	top: 2px;
+    visibility: hidden;
 }
+
+footer:after {
+    content: 'goodbye'; 
+    visibility: visible;
+    display: block;
+    position: relative;
+    padding: 5px;
+    top: 2px;
+}
+</style>
+"""
+
+# Aplicando o CSS para esconder o rodapé original e adicionar "goodbye"
+st.markdown(hide_footer_style, unsafe_allow_html=True
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
     """
