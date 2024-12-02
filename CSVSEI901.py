@@ -8,22 +8,6 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# Novo código SVG para o ícone desejado (um exemplo simples de um círculo)
-new_svg_icon = """
-<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
-</svg>
-"""
-
-# CSS para ocultar o badge original da Streamlit
-hide_st_style = """
-<style>
-._container_gzau3_1._viewerBadge_nim44_23 {
-    display: none !important;
-}
-</style>
-"""
-
 # Aplicando o CSS para ocultar o badge original
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
