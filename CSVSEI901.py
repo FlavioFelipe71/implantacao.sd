@@ -23,7 +23,7 @@ st.markdown(
     </script>
     """,
     unsafe_allow_html=True
-
+)
 
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
