@@ -8,13 +8,11 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
+# Ocultar o rodapé padrão do Streamlit
 st.markdown(
     """
     <style>
-        /* Ocultar qualquer div que contenha SVG no rodapé */
-        footer div:has(svg) {
-            display: none !important;
-        }
+        footer {visibility: hidden;}
     </style>
     """,
     unsafe_allow_html=True
