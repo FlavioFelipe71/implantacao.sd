@@ -19,7 +19,7 @@ a[href="https://share.streamlit.io/user/FlavioFelipe71"] {
 """
 
 # Aplica o CSS para esconder o avatar
-st.markdown(hide_avatar_css, unsafe_allow_html=True)
+st.markdown(hide_avatar_css, unsafe_allow_html=false)
 ###########################################################################
 # CSS personalizado para ocultar o rodapé original e definir um novo rodapé
 footer = """
