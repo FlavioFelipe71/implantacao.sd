@@ -8,38 +8,19 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# CSS para ocultar o rodapé original e exibir "goodbye"
-hide_footer_style = """
-<style>
-footer {
-    visibility: hidden;
-}
+footer="
 
-footer:after {
-    content: 'goodbye'; 
-    visibility: visible;
-    display: block;
-    position: relative;
-    padding: 5px;
-    top: 2px;
-}
-</style>
-"""
+<style> your css code put here</style>
 
-# Aplicando o CSS para esconder o rodapé original e adicionar "goodbye"
-st.markdown(hide_footer_style, unsafe_allow_html=True
-# CSS para ocultar o ícone do GitHub no canto superior direito
-st.markdown(
-    """
-    <style>
-        /* Ocultar o ícone do GitHub ou outros botões da barra de ferramentas */
-        .stToolbarActionButton {
-            display: none;
-        }
-    </style>
-    """, 
-    unsafe_allow_html=True
-)
+<div class='footer'>
+
+<p>the word you want to tell<a style='display:block;text-align:center;' 
+
+href='https://www.streamlit.io' target='_blank'>your email address put here</a></p>
+
+</div>"
+
+st.markdown(footer, unsafe_allow_html=True)
 
 # CSS para ocultar o elemento <header>
 st.markdown(
