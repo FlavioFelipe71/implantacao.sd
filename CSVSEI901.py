@@ -9,16 +9,16 @@ import base64
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
 # Aplicando o CSS para ocultar o badge original
-st.markdown(hide_st_style, unsafe_allow_html=True)
+#st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # Exibindo o novo ícone em vez do original
-st.markdown(new_svg_icon, unsafe_allow_html=True)
+#st.markdown(new_svg_icon, unsafe_allow_html=True)
 
 # Aplicando o CSS para ocultar o badge original
-st.markdown(hide_st_style, unsafe_allow_html=True)
+#st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # Adicionando o novo ícone em vez do original
-st.markdown(new_svg_icon, unsafe_allow_html=True)
+#st.markdown(new_svg_icon, unsafe_allow_html=True)
 
 # CSS para ocultar o ícone do GitHub no canto superior direito
 st.markdown(
