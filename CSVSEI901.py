@@ -8,11 +8,18 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-hide_footer_style = """
+# Código CSS para ocultar o avatar do criador do app
+hide_avatar_css = """
 <style>
-.reportview-container .main footer {visibility: hidden;}    
+/* Seleciona o link do avatar do criador do app e oculta */
+a[href="https://share.streamlit.io/user/FlavioFelipe71"] {
+    display: none !important;
+}
+</style>
 """
-st.markdown(hide_footer_style, unsafe_allow_html=True)
+
+# Aplica o CSS para esconder o avatar
+st.markdown(hide_avatar_css, unsafe_allow_html=True)
 ###########################################################################
 # CSS personalizado para ocultar o rodapé original e definir um novo rodapé
 footer = """
