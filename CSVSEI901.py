@@ -56,7 +56,7 @@ footer {
 </style>
 
 <div class='footer'>
-    <p>Custom message here! <a href='https://scvsei901.streamlit.app/' target='_blank'>Click here for Streamlit</a></p>
+    <p><a href='https://scvsei901.streamlit.app/' target='_blank'>Click aqui para acessar a pagina</a></p>
 </div>
 """
 
