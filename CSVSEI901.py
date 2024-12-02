@@ -8,19 +8,13 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-# CSS para ocultar o badge "Hosted with Streamlit"
+# CSS para ocultar o badge com a classe "_link_gzau3_10"
 st.markdown(
     """
     <style>
-        /* Ocultar todos os links contendo o texto 'Hosted with Streamlit' */
-        a:has(p._text_gzau3_22) {
+        /* Ocultar qualquer elemento com a classe '_link_gzau3_10' */
+        div._link_gzau3_10 {
             display: none !important;
-        }
-
-        /* Alternativa para ocultar qualquer elemento relacionado ao badge */
-        footer {
-            visibility: hidden !important;
-            height: 0 !important;
         }
     </style>
     """,
