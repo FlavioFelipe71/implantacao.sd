@@ -8,20 +8,48 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
-footer="
+# CSS personalizado para ocultar o rodapé original e definir um novo rodapé
+footer = """
+<style>
+/* Ocultar o rodapé original do Streamlit */
+footer {
+    visibility: hidden;
+}
 
-<style> your css code put here</style>
+/* Rodapé personalizado */
+.footer {
+    visibility: visible;
+    display: block;
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Link no rodapé */
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+</style>
 
 <div class='footer'>
+    <p>Custom message here! <a href='https://www.streamlit.io' target='_blank'>Click here for Streamlit</a></p>
+</div>
+"""
 
-<p>the word you want to tell<a style='display:block;text-align:center;' 
-
-href='https://www.streamlit.io' target='_blank'>your email address put here</a></p>
-
-</div>"
-
+# Aplica o rodapé personalizado no app Streamlit
 st.markdown(footer, unsafe_allow_html=True)
-
+#################################################################
 # CSS para ocultar o elemento <header>
 st.markdown(
     """
