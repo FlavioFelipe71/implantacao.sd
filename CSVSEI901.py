@@ -4,7 +4,6 @@ import streamlit as st
 import os
 import locale
 import base64
-import locales-all
 
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
@@ -88,7 +87,6 @@ def buscar_peso_no_packinglist(produto, packinglist_df):
 
 # Configura o locale para o padrão brasileiro
 #locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-locale.setlocale(locale.LC_ALL, "german")
 
 def formatar_valor(valor):    
     if pd.notna(valor):  # Verifica se o valor não é NaN
