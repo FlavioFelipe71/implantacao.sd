@@ -343,18 +343,15 @@ def main():
         # Upload do arquivo packinglist.csv
         uploaded_file_packinglist = st.file_uploader("Leitura packinglist.csv", type="csv")
         if uploaded_file_packinglist:
-            # Ler o packinglist.csv
+            # Processamento de packing list e ajuste dos pesos
             packinglist_df = pd.read_csv(uploaded_file_packinglist, sep=";", encoding="utf-8")
-            packinglist_df['produto'] = packinglist_df['produto'].astype(str).str.zfill(7)  # Ajuste para ter 7 dígitos com zeros à esquerda
-
-            # Atualizar os pesos para cada produto
+            packinglist_df['produto'] = packinglist_df['produto'].astype(str).str.zfill(7)
+        
             for i in range(len(data["PRODUTO"])):
                 produto = data["PRODUTO"][i]
                 peso = buscar_peso_no_packinglist(produto, packinglist_df)
                 data["PESO ITEM"][i] = peso
-                        # Exibir os dados com a coluna PESO ITEM preenchida
-    
-    
+        
             st.subheader("Espelho do SEI901CSV")
             #st.write(pd.DataFrame(data))  # Exibe os dados com a coluna PESO ITEM preenchida    
             # Definir o CSS personalizado
@@ -383,17 +380,17 @@ def main():
             # Adicionar o CSS ao app Streamlit
             st.markdown(css, unsafe_allow_html=True)
             # Gerar o CSV
+            # Gerar o CSV com os ajustes
             csv_filename = "ITENS-DI-SEI901CSV.csv"
             csv_path = gerar_csv(data, csv_filename)
-
-            # Exibir sucesso e link para download
-            st.success(f"CSV gerado com sucesso! Clique abaixo para baixar:")
+        
+            st.success("CSV gerado com sucesso! Clique abaixo para baixar:")
             with open(csv_path, "r", encoding="utf-8") as f:
                 st.download_button(
                     label="Baixar CSV Gerado",
                     data=f,
                     file_name=csv_filename,
-                    mime="text/csv"
+                    mime="text/csv",
                 )
 
 if __name__ == "__main__":
