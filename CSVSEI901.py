@@ -239,9 +239,9 @@ def gerar_csv(data, csv_filename):
     # Iterar sobre as colunas numéricas para ajustar os valores
     for coluna in df.select_dtypes(include=["float", "int"]).columns:
         #df[coluna] = (df[coluna] / 1000000).astype(str).str.replace('.', '', regex=False)
-        df['QUANTIDADE'] = df['QUANTIDADE'] / 1000000).astype(str).str.replace('.', '', regex=False)
-        df['VALOR UNITARIO'] = df['VALOR UNITARIO']/ 1000000).astype(str).str.replace('.', '', regex=False)
-        df['VALOR TOTAL'] = df['VALOR TOTAL']/ 1000000).astype(str).str.replace('.', '', regex=False)
+        df['QUANTIDADE'] = (df['QUANTIDADE'] / 1000000).astype(str).str.replace('.', '', regex=False)
+        df['VALOR UNITARIO'] = (df['VALOR UNITARIO']/ 1000000).astype(str).str.replace('.', '', regex=False)
+        df['VALOR TOTAL'] = (df['VALOR TOTAL']/ 1000000).astype(str).str.replace('.', '', regex=False)
 
     # Salvar o DataFrame no formato CSV
     caminho_csv = os.path.join(os.getcwd(), csv_filename)
