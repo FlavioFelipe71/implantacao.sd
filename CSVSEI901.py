@@ -238,7 +238,7 @@ def gerar_csv(data, csv_filename):
     
     # Iterar sobre as colunas numéricas para ajustar os valores
     for coluna in df.select_dtypes(include=["float", "int"]).columns:
-        df[coluna] = (df[coluna] / 10).astype(str).str.replace('.', '', regex=False)
+        df[coluna] = (df[coluna] / 100000).astype(str).str.replace('.', '', regex=False)
 
     # Salvar o DataFrame no formato CSV
     caminho_csv = os.path.join(os.getcwd(), csv_filename)
