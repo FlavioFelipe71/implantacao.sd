@@ -227,26 +227,24 @@ def ajustar_e_formatar(valor, divisor):
 
 
 
-def gerar_csv(data, filename):
-    # Converter o dicionário 'data' em um DataFrame do pandas
+def gerar_csv(data, csv_filename):
+    """
+    Função para gerar o CSV ajustando valores:
+    - Remove o ponto decimal de valores numéricos.
+    - Divide valores por 10 antes de salvar no arquivo.
+    """
+    # Criar um DataFrame a partir dos dados processados
     df = pd.DataFrame(data)
-    # Divisores específicos para cada coluna
-    df['QUANTIDADE'] = df['QUANTIDADE'].apply(lambda x: ajustar_e_formatar(x, 1_000_00))
-    df['VALOR UNITARIO'] = df['VALOR UNITARIO'].apply(lambda x: ajustar_e_formatar(x, 1_000_0000))
-    df['VALOR TOTAL'] = df['VALOR TOTAL'].apply(lambda x: ajustar_e_formatar(x, 1_000_000_000_000))
-        
-    st.dataframe(df)
+    
+    # Iterar sobre as colunas numéricas para ajustar os valores
+    for coluna in df.select_dtypes(include=["float", "int"]).columns:
+        df[coluna] = (df[coluna] / 10).astype(str).str.replace('.', '', regex=False)
 
-    # Criar o caminho completo para o arquivo CSV
-    csv_path = os.path.join(os.getcwd(), filename)
+    # Salvar o DataFrame no formato CSV
+    caminho_csv = os.path.join(os.getcwd(), csv_filename)
+    df.to_csv(caminho_csv, index=False, sep=";", encoding="utf-8")
+    return caminho_csv
 
-    # Salvar o DataFrame como um arquivo CSV
-    df.to_csv(csv_path, index=False, sep=";", encoding="utf-8")
-
-    return csv_path
-
-
-# Função principal
 def main():
     # Adicionar a logo ao topo
     # Obtém o diretório atual do script
@@ -267,18 +265,16 @@ def main():
     )
             
     st.markdown(f"<div style='font-size: 25px; font-weight: bold; color: #1E90FF;margin-top: 30px'>1º Passo: Importar arquivo XML</div>", unsafe_allow_html=True)
-        #st.title("Editar o XML Tags: < descricaoMercadoria >, < numeroDI >, < fornecedorNome > com Base no CSV")
+    #st.title("Editar o XML Tags: < descricaoMercadoria >, < numeroDI >, < fornecedorNome > com Base no CSV")
     st.markdown("""
     <div style="text-align: left; padding: 20px;">
         <p><strong>O objetivo é ler o XMl e montar uma Planilha base para importação do ITENS-DI-SEI901CSV </p>
         <p>Prepare uma planilha com a relação dos produtos e o peso líquido unitário de cada um deles..<strong></p>
-  
-    
     </div>
     """, unsafe_allow_html=True)    
+
     # Inserindo o estilo CSS para customizar a borda
     # Definir o CSS personalizado
-# Definir o CSS personalizado
     css = """
     <style>
         /* Estiliza o container do file_uploader */
@@ -322,6 +318,7 @@ def main():
 
     # Adicionar o CSS ao app Streamlit
     st.markdown(css, unsafe_allow_html=True)
+
     # Upload do arquivo XML
     uploaded_file_xml = st.file_uploader("Envie o arquivo XML", type="xml")
 
@@ -354,7 +351,8 @@ def main():
         
             st.subheader("Espelho do SEI901CSV")
             #st.write(pd.DataFrame(data))  # Exibe os dados com a coluna PESO ITEM preenchida    
-            # Definir o CSS personalizado
+            
+            # Definir o CSS personalizado para o botão de download
             css = """
             <style>
                 /* Altera o estilo do botão de download */
@@ -376,10 +374,9 @@ def main():
                 }
             </style>
             """
-
             # Adicionar o CSS ao app Streamlit
             st.markdown(css, unsafe_allow_html=True)
-            # Gerar o CSV
+
             # Gerar o CSV com os ajustes
             csv_filename = "ITENS-DI-SEI901CSV.csv"
             csv_path = gerar_csv(data, csv_filename)
