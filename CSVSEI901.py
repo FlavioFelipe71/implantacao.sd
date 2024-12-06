@@ -86,7 +86,8 @@ def buscar_peso_no_packinglist(produto, packinglist_df):
         return None  # Retorna None se não encontrar correspondência
 
 # Configura o locale para o padrão brasileiro
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+#locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+locale.setlocale(locale.LC_ALL, 'en_CA.UTF-8')
 
 def formatar_valor(valor):
     if pd.notna(valor):  # Verifica se o valor não é NaN
