@@ -8,6 +8,19 @@ import base64
 # Configurar a largura da página para "wide" ao fechar a sidebar
 st.set_page_config(page_title="CSVSEI901", layout="wide", page_icon="🌲")
 
+# CSS para ocultar o elemento <header>
+st.markdown(
+    """
+    <style>
+        /* Ocultar o header completo */
+        .stAppHeader {
+            display: none;
+        }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
 ##### Oculta o botão Deploy do Streamilit
 st.markdown("""
     <style>
@@ -73,7 +86,7 @@ def buscar_peso_no_packinglist(produto, packinglist_df):
         return None  # Retorna None se não encontrar correspondência
 
 # Configura o locale para o padrão brasileiro
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+#locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 def formatar_valor(valor):
     if pd.notna(valor):  # Verifica se o valor não é NaN
@@ -145,11 +158,11 @@ def processar_xml(root):
 
 # Coluna 1: Campo de entrada para o código do FORNECEDOR (6 caracteres)
     with col1:
-        fornecedor_input = st.text_input("Informe o código do FORNECEDOR (6 caracteres):", max_chars=6)
+        fornecedor_input = st.text_input("Informe o COD do FORNECEDOR (6 caracteres):", max_chars=6)
 
     # Coluna 2: Campo de entrada para o Nro da Ordem de Compra
     with col2:
-        ordem_compra_input = st.text_input("Informe o Nro da Ordem de Compra:", max_chars=15)  # Adicionando o campo para Ordem de Compra
+        ordem_compra_input = st.text_input("Informe o NRO da Ordem de Compra:", max_chars=15)  # Adicionando o campo para Ordem de Compra
 
     # Estilo do botão e dos campos de entrada (o mesmo que você forneceu)
     st.markdown("""<style>
