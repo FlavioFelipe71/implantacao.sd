@@ -219,22 +219,26 @@ def processar_xml(root):
     return data
 
 # Função para ajustar valores e formatar no padrão brasileiro
+# Função para ajustar e formatar os valores
 def ajustar_e_formatar(valor, divisor):
-    if pd.notna(valor):  # Verifica se o valor não é NaN
-        valor_ajustado = valor / divisor
-        return locale.format_string('%.2f', valor_ajustado, grouping=True)
-    return valor  # Retorna o valor original caso seja NaN
-
-
+    try:
+        # Remove ponto de milhar e converte para float
+        valor = float(str(valor).replace('.', '').replace(',', '.'))
+        # Divide pelo divisor e retorna o valor ajustado
+        return valor / divisor
+    except ValueError:
+        return valor  # Se não for um valor numérico, retorna o valor original
 
 def gerar_csv(data, filename):
     # Converter o dicionário 'data' em um DataFrame do pandas
     df = pd.DataFrame(data)
+
     # Divisores específicos para cada coluna
-    df['QUANTIDADE'] = df['QUANTIDADE'].apply(lambda x: ajustar_e_formatar(x, 1_000_00))
-    df['VALOR UNITARIO'] = df['VALOR UNITARIO'].apply(lambda x: ajustar_e_formatar(x, 1_000_0000))
-    df['VALOR TOTAL'] = df['VALOR TOTAL'].apply(lambda x: ajustar_e_formatar(x, 1_000_000_000_000))
-        
+    df['QUANTIDADE'] = df['QUANTIDADE'].apply(lambda x: ajustar_e_formatar(x, 1_000))  # Dividir por 1000
+    df['VALOR UNITARIO'] = df['VALOR UNITARIO'].apply(lambda x: ajustar_e_formatar(x, 1_000_0000))  # Dividir por 10 milhões
+    df['VALOR TOTAL'] = df['VALOR TOTAL'].apply(lambda x: ajustar_e_formatar(x, 1_000_000_000_000))  # Dividir por 1 trilhão
+    
+    # Exibir o DataFrame no Streamlit
     st.dataframe(df)
 
     # Criar o caminho completo para o arquivo CSV
@@ -245,86 +249,61 @@ def gerar_csv(data, filename):
 
     return csv_path
 
-
 # Função principal
 def main():
     # Adicionar a logo ao topo
-    # Obtém o diretório atual do script
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    # Constrói o caminho da imagem dinamicamente
     logo_path = os.path.join(current_dir, "Logo_sd.png")
-    # Exibe a logo
     st.image(logo_path, width=200)
 
-    # Titulo do Programa
-    st.markdown(
-        """
+    st.markdown("""
         <h1 style="text-align: center; font-size: 40px; color: #4CAF50;">
             Gerar SEI901CSV a partir de XML
         </h1>
-        """,
-        unsafe_allow_html=True,
-    )
-            
+    """, unsafe_allow_html=True)
+
     st.markdown(f"<div style='font-size: 25px; font-weight: bold; color: #1E90FF;margin-top: 30px'>1º Passo: Importar arquivo XML</div>", unsafe_allow_html=True)
-        #st.title("Editar o XML Tags: < descricaoMercadoria >, < numeroDI >, < fornecedorNome > com Base no CSV")
     st.markdown("""
-    <div style="text-align: left; padding: 20px;">
-        <p><strong>O objetivo é ler o XMl e montar uma Planilha base para importação do ITENS-DI-SEI901CSV </p>
-        <p>Prepare uma planilha com a relação dos produtos e o peso líquido unitário de cada um deles..<strong></p>
-  
-    
-    </div>
-    """, unsafe_allow_html=True)    
-    # Inserindo o estilo CSS para customizar a borda
-    # Definir o CSS personalizado
-# Definir o CSS personalizado
+        <div style="text-align: left; padding: 20px;">
+            <p><strong>O objetivo é ler o XMl e montar uma Planilha base para importação do ITENS-DI-SEI901CSV </p>
+            <p>Prepare uma planilha com a relação dos produtos e o peso líquido unitário de cada um deles..<strong></p>
+        </div>
+    """, unsafe_allow_html=True)
+
     css = """
     <style>
         /* Estiliza o container do file_uploader */
         [data-testid='stFileUploader'] {
             width: max-content;
         }
-
-        /* Estiliza a seção interna do file_uploader */
         [data-testid='stFileUploader'] section {
             padding: 0;
             float: left;
         }
-
-        /* Esconde o ícone e o texto padrão do botão */
         [data-testid='stFileUploader'] section > input + div {
             display: none;
         }
-
-        /* Estiliza a parte visível do botão */
         [data-testid='stFileUploader'] section + div {
             float: right;
             padding-top: 0;
         }
-
-        /* Altera a cor de fundo do botão */
         [data-testid='stFileUploader'] label {
-            background-color: #999999;  /* Cor de fundo do botão */
-            color: white;  /* Cor do texto */
+            background-color: #999999;  
+            color: white;  
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
         }
-
-        /* Altera a cor do botão ao passar o mouse (hover) */
         [data-testid='stFileUploader'] label:hover {
-            background-color: #45a049; /* Cor do botão ao passar o mouse */
+            background-color: #45a049;
         }
     </style>
     """
-
-    # Adicionar o CSS ao app Streamlit
     st.markdown(css, unsafe_allow_html=True)
+
     # Upload do arquivo XML
     uploaded_file_xml = st.file_uploader("Envie o arquivo XML", type="xml")
-
     if uploaded_file_xml:
         tree, root = ler_xml(uploaded_file_xml)
 
@@ -337,56 +316,23 @@ def main():
                 <p>Criar arquivo packinglist.csv contendo 2 colunas: <strong>produto;peso</strong></p>
                 <p>A leitura desse arquivo é obrigatório para gerar as informações em tela do CSVSEI901.</p>
             </div>
-            """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
-        
         # Upload do arquivo packinglist.csv
         uploaded_file_packinglist = st.file_uploader("Leitura packinglist.csv", type="csv")
         if uploaded_file_packinglist:
-            # Ler o packinglist.csv
             packinglist_df = pd.read_csv(uploaded_file_packinglist, sep=";", encoding="utf-8")
-            packinglist_df['produto'] = packinglist_df['produto'].astype(str).str.zfill(7)  # Ajuste para ter 7 dígitos com zeros à esquerda
+            packinglist_df['produto'] = packinglist_df['produto'].astype(str).str.zfill(7)
 
-            # Atualizar os pesos para cada produto
             for i in range(len(data["PRODUTO"])):
                 produto = data["PRODUTO"][i]
                 peso = buscar_peso_no_packinglist(produto, packinglist_df)
                 data["PESO ITEM"][i] = peso
-                        # Exibir os dados com a coluna PESO ITEM preenchida
-    
-    
+
             st.subheader("Espelho do SEI901CSV")
-            #st.write(pd.DataFrame(data))  # Exibe os dados com a coluna PESO ITEM preenchida    
-            # Definir o CSS personalizado
-            css = """
-            <style>
-                /* Altera o estilo do botão de download */
-                [data-testid='stDownloadButton'] {
-                    background-color: #999999;  /* Cor de fundo do botão (verde) */
-                    color: Green;  /* Cor do texto */
-                    padding: 12px 25px;  /* Aumenta o tamanho do botão */
-                    border-radius: 10px;  /* Borda arredondada */
-                    font-size: 18px;  /* Tamanho da fonte */
-                    font-weight: bold;  /* Peso da fonte */
-                    cursor: pointer;  /* Cursor de mão */
-                    text-align: center;  /* Alinha o texto ao centro */
-                    border: none;  /* Remove a borda padrão */
-                }
-
-                /* Efeito hover do botão */
-                [data-testid='stDownloadButton']:hover {
-                    background-color: #28a745;  /* Cor de fundo mais escura ao passar o mouse */
-                }
-            </style>
-            """
-
-            # Adicionar o CSS ao app Streamlit
-            st.markdown(css, unsafe_allow_html=True)
-            # Gerar o CSV
             csv_filename = "ITENS-DI-SEI901CSV.csv"
             csv_path = gerar_csv(data, csv_filename)
 
-            # Exibir sucesso e link para download
             st.success(f"CSV gerado com sucesso! Clique abaixo para baixar:")
             with open(csv_path, "r", encoding="utf-8") as f:
                 st.download_button(
