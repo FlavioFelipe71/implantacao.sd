@@ -234,6 +234,11 @@ def gerar_csv(data, filename):
     df['QUANTIDADE'] = df['QUANTIDADE'].apply(lambda x: ajustar_e_formatar(x, 1_000_00))
     df['VALOR UNITARIO'] = df['VALOR UNITARIO'].apply(lambda x: ajustar_e_formatar(x, 1_000_0000))
     df['VALOR TOTAL'] = df['VALOR TOTAL'].apply(lambda x: ajustar_e_formatar(x, 1_000_000_000_000))
+
+    # Substituindo o ponto por vírgula nas colunas específicas
+    df['QUANTIDADE'] = df['QUANTIDADE'].apply(lambda x: str(x).replace('.', ','))
+    df['VALOR UNITARIO'] = df['VALOR UNITARIO'].apply(lambda x: str(x).replace('.', ','))
+    df['VALOR TOTAL'] = df['VALOR TOTAL'].apply(lambda x: str(x).replace('.', ','))
         
     st.dataframe(df)
 
