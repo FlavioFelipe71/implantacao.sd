@@ -82,8 +82,13 @@ def buscar_peso_no_packinglist(produto, packinglist_df):
     
     if not matching_row.empty:
         return matching_row['peso'].values[0]  # Retorna o peso correspondente
+    
+    if not matching_row.empty:
+        return matching_row['fornecedorNome'].values[0]
+    
     else:
         return None  # Retorna None se não encontrar correspondência
+     
 
 # Configura o locale para o padrão brasileiro
 #locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -110,6 +115,7 @@ def processar_xml(root):
     di_global = None  # Variável para armazenar o número DI
     letra_atual = None  # Variável para armazenar o número de adição atual
     ncm_atual = None  # Variável para armazenar o NCM atual
+    fornecedor_atual = None # Variável para armazenar o fornecedor atual
 
     # Capturar o valor de DI no início do XML
     for elem in root.iter("numeroDI"):
@@ -135,12 +141,16 @@ def processar_xml(root):
                 data["LETRA"].append(letra_atual)
                 data["DI"].append(di_global if di_global else "N/A")  # Associar DI
                 data["NCM"].append(ncm_atual if ncm_atual else "N/A")  # Associar NCM ou N/A
+                data["FORNECEDOR"].append(fornecedor_atual if fornecedor_atual else "N/A")  # Associar NCM ou N/A
 
             produtos_temp = []  # Limpar lista de produtos temporários
 
         # Quando encontrar o código NCM
         elif elem.tag == "dadosMercadoriaCodigoNcm":
             ncm_atual = elem.text.strip() if elem.text else ""
+  
+        elif elem.tag == "fornecedorNome":
+            fornecedor_atual = elem.text.strip() if elem.text else ""    
 
         # Preenchendo outras informações
         elif elem.tag == "quantidade":
@@ -153,6 +163,7 @@ def processar_xml(root):
         data["VALOR TOTAL"].append(data["QUANTIDADE"][i] * data["VALOR UNITARIO"][i])
         data["PESO ITEM"].append(None)  # Inicializando com None para preenchimento posterior
 
+        
     # Layout de 3 colunas
     col1, col2, col3 = st.columns([2, 2, 5])
 
@@ -225,8 +236,6 @@ def ajustar_e_formatar(valor, divisor):
         return locale.format_string('%.2f', valor_ajustado, grouping=True)
     return valor  # Retorna o valor original caso seja NaN
 
-
-
 def gerar_csv(data, filename):
     # Converter o dicionário 'data' em um DataFrame do pandas
     df = pd.DataFrame(data)
@@ -239,6 +248,7 @@ def gerar_csv(data, filename):
     df['QUANTIDADE'] = df['QUANTIDADE'].apply(lambda x: str(x).replace('.', ','))
     df['VALOR UNITARIO'] = df['VALOR UNITARIO'].apply(lambda x: str(x).replace('.', ','))
     df['VALOR TOTAL'] = df['VALOR TOTAL'].apply(lambda x: str(x).replace('.', ','))
+     
         
     st.dataframe(df)
 
@@ -358,6 +368,14 @@ def main():
                 peso = buscar_peso_no_packinglist(produto, packinglist_df)
                 data["PESO ITEM"][i] = peso
                         # Exibir os dados com a coluna PESO ITEM preenchida
+
+                        # Atualizar os pesos para cada produto
+            for i in range(len(data["PRODUTO"])):
+                produto = data["PRODUTO"][i]
+                peso = buscar_peso_no_packinglist(produto, packinglist_df)
+                data["PESO ITEM"][i] = peso
+                        # Exibir os dados com a coluna PESO ITEM preenchida            
+
     
     
             st.subheader("Espelho do SEI901CSV")
@@ -403,5 +421,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
