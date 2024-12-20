@@ -281,7 +281,7 @@ def main():
         unsafe_allow_html=True,
     )
             
-    st.markdown(f"<div style='font-size: 25px; font-weight: bold; color: #1E90FF;margin-top: 30px'>1º Passo: Importar arquivo XML</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='font-size: 25px; font-weight: bold;margin-top: 30px'>1º Passo: Importar arquivo XML</div>", unsafe_allow_html=True)
         #st.title("Editar o XML Tags: < descricaoMercadoria >, < numeroDI >, < fornecedorNome > com Base no CSV")
     st.markdown("""
     <div style="text-align: left; padding: 20px;">
