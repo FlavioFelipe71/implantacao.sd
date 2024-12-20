@@ -205,6 +205,24 @@ def processar_xml(root):
     }
     </style>""", unsafe_allow_html=True)
 
+        # Estilo do botão
+    st.markdown("""<style>
+        .stButton button {
+            background-color: #4CAF50;  /* Cor do botão - Verde */
+            color: white;  /* Cor do texto */
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;  /* Ajustando o padding para maior altura */
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;  /* Tamanho do botão */
+            height: 50px;  /* Altura do botão */
+        }
+        .stButton button:hover {
+            background-color: #45a049;  /* Verde mais escuro ao passar o mouse */
+        }
+    </style>""", unsafe_allow_html=True)
+
     # Botão para incluir FORNECEDOR e ORDEM DE COMPRA
     if st.button("Incluir Fornecedor e Ordem de Compra"):
         # Verificação de entradas
